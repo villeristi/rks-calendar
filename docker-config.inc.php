@@ -36,7 +36,7 @@ namespace MRBS;
 //
 // A list of valid timezones can be found at http://php.net/manual/timezones.php
 // The following line must be uncommented by removing the '//' at the beginning
-$timezone = $_ENV['MRBS_TIMEZONE'] ?? "Etc/UTC";
+// $timezone = $_ENV['MRBS_TIMEZONE'] ?? "Etc/UTC";
 
 /*******************
  * Database settings
@@ -76,3 +76,48 @@ $db_persist = false;
 /* Add lines from systemdefaults.inc.php and areadefaults.inc.php below here
    to change the default configuration. Do _NOT_ modify systemdefaults.inc.php
    or areadefaults.inc.php.  */
+
+
+$override_locale = "fi";
+
+$disable_automatic_language_changing = true;
+
+// Set this to a different language specifier to default to different
+// language tokens. This must equate to a lang.* file in MRBS.
+// e.g. use "fr" to use the translations in "lang.fr" as the default
+// translations.  [NOTE: it is only necessary to change this if you
+// have disabled automatic language changing above]
+$default_language_tokens = "fi";
+
+$timezone = "Europe/Helsinki";
+
+$mrbs_admin = "Wille";
+$mrbs_admin_email = "villeristimaki@gmail.com";
+// NOTE:  there are more email addresses in $mail_settings below.    You can also give
+// email addresses in the format 'Full Name <address>', for example:
+// $mrbs_admin_email = 'Booking System <admin_email@your.org>';
+// if the name section has any "peculiar" characters in it, you will need
+// to put the name in double quotes, e.g.:
+// $mrbs_admin_email = '"Bloggs, Joe" <admin_email@your.org>';
+
+// The company name is mandatory.   It is used in the header and also for email notifications.
+// The company logo, additional information and URL are all optional.
+
+$mrbs_company = "RKS";   // This line must always be uncommented ($mrbs_company is used in various places)
+
+// Uncomment this next line to use a logo instead of text for your organisation in the header
+//$mrbs_company_logo = "your_logo.gif";    // name of your logo file.   This example assumes it is in the MRBS directory
+
+// Uncomment this next line for supplementary information after your company name or logo.
+// This can contain HTML, for example if you want to include a link.
+//$mrbs_company_more_info = "You can put additional information here";  // e.g. "XYZ Department"
+
+// Uncomment this next line to have a link to your organisation in the header
+//$mrbs_company_url = "http://www.your_organisation.com/";
+
+// This is to fix URL problems when using a proxy in the environment.
+// If links inside MRBS or in email notifications appear broken, then specify here the URL of
+// your MRBS root directory, as seen by the users. For example:
+// $url_base =  "http://example.com/mrbs";
+
+$theme = "default";
