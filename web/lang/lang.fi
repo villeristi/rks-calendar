@@ -10,7 +10,7 @@
 // This file is PHP code. Treat it as such.
 
 // Used in style.inc
-$vocab["mrbs"]               = "Huonetilojen varausjärjestelmä";
+$vocab["mrbs"]               = "Varausjärjestelmä";
 
 // Used in functions.inc
 $vocab["report"]             = "Raportit";
@@ -22,13 +22,14 @@ $vocab["search"]             = "Etsi";
 $vocab["bookingsfor"]        = "Varaukset";
 $vocab["bookingsforpost"]    = ""; // Goes after the date
 $vocab["areas"]              = "Tilat";
+$vocab["today"]              = "Tänään";
 $vocab["daybefore"]          = "Edelliseen päivään";
 $vocab["dayafter"]           = "Seuraavaan päivään";
 $vocab["gototoday"]          = "Tähän päivään";
 $vocab["goto"]               = "mene";
 $vocab["nav_day"]            = "Päivä";
 $vocab["nav_week"]           = "Viikko";
-$vocab["nav_month"]          = "Month";
+$vocab["nav_month"]          = "Kuukausi";
 $vocab["highlight_line"]     = "Korosta tämä rivi";
 $vocab["click_to_reserve"]   = "Napsauta solua tehdäksesi varauksen.";
 $vocab["timezone"]           = "Aikavyöhyke";
@@ -93,7 +94,7 @@ $vocab["rep_for_nweekly"]    = "(määräaikaiselle viikottaiselle)";
 $vocab["skip_conflicts"]     = "Ohita menneet ristiriidat";
 $vocab["ctrl_click"]         = "Pidä CTRL-nappi pohjassa valitaksesi useita huoneita.";
 $vocab["entryid"]            = "Varauksen ID ";
-$vocab["repeat_id"]          = "Toiston ID "; 
+$vocab["repeat_id"]          = "Toiston ID ";
 $vocab["brief_description"]  = "Lyhyt kuvaus";
 $vocab["status"]             = "Tila";
 $vocab["public"]             = "Julkinen";
@@ -150,7 +151,7 @@ $vocab["schedule"]           = "Aikataulu"; //NOTE onko fiksu käännös?
 $vocab["policy"]             = "Käytäntö";
 $vocab["too_many_entries"]   = "Valituilla ehdoilla tulisi liian monta varausta.<br>Valittuja ehtoja on muutettava.";
 $vocab["returncal"]          = "Paluu kalenterinäkymään";
-$vocab["failed_to_acquire"]  = "Tietokantaan ei saatu (varauksetonta) yhteyttä."; 
+$vocab["failed_to_acquire"]  = "Tietokantaan ei saatu (varauksetonta) yhteyttä.";
 $vocab["invalid_booking"]    = "Virheellinen varaus";
 $vocab["must_set_description"] = "Varaukselle tulee asettaa kuvaus. Palaa takaisin ja korjaa puutteet.";
 $vocab["mail_subject_approved"]  = "Varaus hyväksytty yrityksen %s MRBS-järjestelmässä"; // $mrbs_company
@@ -206,6 +207,7 @@ $vocab["unknown_user"]       = "Tuntematon käyttäjä";
 $vocab["login"]              = "Kirjaudu sisään";
 $vocab["logoff"]             = "Kirjaudu ulos";
 $vocab["username_or_email"]  = "Käyttäjänimi tai sähköpostiosoite";
+$vocab["lost_password"]             = "Salasana hukassa?";
 
 // Database upgrade code
 $vocab["database_login"]           = "Tietokannan tunnus"; //Database login, mitä tarkottanee???
@@ -248,6 +250,7 @@ $vocab["show_my_entries"]    = "Näytä tulevat tapahtumat";
 $vocab["no_users_initial"]   = "Ei käyttäjiä tietokannassa, sallitaan ensimmäisten käyttäjien luominen";
 $vocab["no_users_create_first_admin"] = "Luo tunnus ylläpitäjän oikeuksilla. Tämän jälkeen kirjaudu kyseisellä tunnuksella sisään ja luo kyseisen tunnuksen avulla tunnukset järjestelmän muille käyttäjille.";
 $vocab["warning_last_admin"] = "Varoitus! Käyttäjä on viimeinen ylläpito-oikeuksilla varustettu käyttäjä, eikä sitä voida poistaa.";
+$vocab["copy_email_addresses"]  = "Kopioi sähköpostiosoitteet";
 
 // Used in search.php
 $vocab["invalid_search"]     = "Tyhjä tai kelpaamaton haku.";
@@ -457,8 +460,13 @@ $vocab["events_imported"]             = "varaukset tuotu"; //NOTE onko oikea
 $vocab["events_not_imported"]         = "tuomatta jääneet varaukset"; //NOTE onko oikea
 
 // Used in DataTables
-$vocab["show_hide_columns"]  = "Näytä / piilota sarakkeet";
+$vocab["copy"]               = "Kopioi";
+$vocab["dt_all"]             = "Kaikki";
+$vocab["excel"]              = "Excel";
+$vocab["pdf"]                = "PDF";
+$vocab["print"]              = "Tulosta";
 $vocab["restore_original"]   = "Palauta alkuperäinen";
+$vocab["show_hide_columns"]  = "Näytä / piilota sarakkeet";
 
 // Entry types
 $vocab["type.I"]             = "Sisäinen";
