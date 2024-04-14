@@ -1,0 +1,46 @@
+services:
+    web:
+        container_name: rks_app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - "8080:80"
+        volumes:
+            - ./web:/var/www/html/
+            - ./docker-config.inc.php:/var/www/html/config.inc.php
+        environment:
+          MRBS_DB_DATABASE: rks
+          MRBS_DB_USER: rks
+          MRBS_DB_PASSWORD: rks
+          # MRBS_DB_TBL_PREFIX: rks_
+          MRBS_DB_HOST: db
+        links:
+            - db
+        networks:
+            - default
+    db:
+        container_name: rks_db
+        image: mysql:8.0
+        ports:
+            - "3306:3306"
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_DATABASE: rks
+            MYSQL_USER: rks
+            MYSQL_PASSWORD: rks
+            MYSQL_ROOT_PASSWORD: rks
+        volumes:
+            - ./tables.my.sql:/docker-entrypoint-initdb.d/010-tables.sql
+            - ./container-data/db_data:/var/lib/mysql
+        networks:
+            - default
+    # phpmyadmin:
+    #     image: phpmyadmin
+    #     links:
+    #         - db:db
+    #     ports:
+    #         - 8888:80
+volumes:
+  db_data:
+    driver: local
