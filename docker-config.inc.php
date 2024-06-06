@@ -119,5 +119,4 @@ $mrbs_company = "RKS";   // This line must always be uncommented ($mrbs_company 
 // If links inside MRBS or in email notifications appear broken, then specify here the URL of
 // your MRBS root directory, as seen by the users. For example:
 // $url_base =  "http://example.com/mrbs";
-
 $theme = "default";
