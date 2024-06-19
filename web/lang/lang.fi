@@ -134,9 +134,9 @@ $vocab["reject_reason"]       = "Perusteet varauspyynnön hylkäämiselle";
 $vocab["send"]                = "Lähetä";
 $vocab["approve_failed"]      = "Varausta ei voitu hyväksyä";
 $vocab["no_request_yet"]      = "Pyyntöjä ei ole lähetetty"; // Used for the title tooltip on More Info button
-$vocab["last_request"]        = "Last request sent at"; ///TODO        // Used for the title tooltip on More Info button
-$vocab["by"]                  = "by"; ///TODO                          // Used for the title tooltip on More Info button
-$vocab["sent_at"]             = "Sent at "; ///TODO
+$vocab["last_request"]        = "Viimeisin pyyntö lähetetty"; ///TODO        // Used for the title tooltip on More Info button
+$vocab["by"]                  = "toimesta"; ///TODO                          // Used for the title tooltip on More Info button
+$vocab["sent_at"]             = "Lähetetty "; ///TODO
 $vocab["yes"]                 = "Kyllä";
 $vocab["no"]                  = "Ei";
 

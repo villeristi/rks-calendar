@@ -1,0 +1,66 @@
+---
+- hosts: prod
+  become: true
+  remote_user: root
+  roles:
+    - common
+    - dokku_bot.ansible_dokku
+    - geerlingguy.swap
+  vars:
+    app_name: rks
+    app_domains:
+      - tamaeijaavoimaan.rissolagroup.fi
+
+    db_name: rks
+
+    swap_file_size_mb: '2048'
+
+    dokku_version: 0.32.2
+    dokku_hostname: tamaeijaavoimaan.rissolagroup.fi
+    dokku_vhost_enable: false
+    sshcommand_version: 0.17.1
+    herokuish_version: 0.7.2
+    plugn_version: 0.13.0
+
+
+    dokku_users:
+      - name: dokku
+        username: dokku
+        ssh_key: "{{lookup('file', '~/.ssh/id_rsa.pub')}}"
+
+    dokku_plugins:
+      - name: clone
+        url: https://github.com/crisward/dokku-clone.git
+
+      - name: mariadb
+        url: https://github.com/dokku/dokku-mariadb
+
+      - name: letsencrypt
+        url: https://github.com/dokku/dokku-letsencrypt.git
+
+  tasks:
+    - name: dokku_app create
+      dokku_app:
+        app: "{{app_name}}"
+
+    - name: dokku_service_create mariadb
+      dokku_service_create:
+        name: "{{db_name}}"
+        service: mariadb
+
+    - name: dokku_service_link mariadb
+      dokku_service_link:
+        app: "{{app_name}}"
+        name: "{{db_name}}"
+        service: mariadb
+
+    - name: dokku_config
+      dokku_config:
+        app: "{{app_name}}"
+        config:
+          DOKKU_LETSENCRYPT_EMAIL: noreply@rks.fi
+
+    - name: dokku_domains
+      dokku_domains:
+        app: "{{app_name}}"
+        domains: "{{app_domains}}"

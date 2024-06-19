@@ -1,0 +1,7 @@
+- name: dokku
+  src: dokku_bot.ansible_dokku
+  version: v2022.10.17
+
+- name: swap
+  src: geerlingguy.swap
+  version: 1.0.2
