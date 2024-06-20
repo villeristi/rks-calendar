@@ -15,6 +15,10 @@ services:
           MRBS_DB_PASSWORD: rks
           # MRBS_DB_TBL_PREFIX: rks_
           MRBS_DB_HOST: db
+          SMTP_HOST: smtp-relay.brevo.com
+          SMTP_PORT: 587
+          SMTP_LOGIN: 7702b5001@smtp-brevo.com
+          SMTP_PASSWORD: 1MkExKCsaVBTZHUr
         links:
             - db
         networks:

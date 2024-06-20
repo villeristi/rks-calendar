@@ -105,7 +105,7 @@ function print_header_site_info() : void
   {
     echo '<a href="' . htmlspecialchars($mrbs_company_url) . '">';
   }
-  echo '<span>' . htmlspecialchars($mrbs_company) . '</span>';
+  // echo '<span>' . htmlspecialchars($mrbs_company) . '</span>';
   if (!empty($mrbs_company_url))
   {
     echo "</a>\n";
