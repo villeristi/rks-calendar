@@ -122,6 +122,16 @@ $mrbs_company = "RKS";   // This line must always be uncommented ($mrbs_company 
 $theme = "default";
 
 
+/******************
+ * Display settings
+ ******************/
+
+// [These are all variables that control the appearance of pages and could in time
+//  become per-user settings]
+
+// Start of week: 0 for Sunday, 1 for Monday, etc.
+$weekstarts = 1;
+
 /**********************************************
  * Email settings
  **********************************************/

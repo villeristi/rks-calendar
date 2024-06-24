@@ -46,7 +46,7 @@ $enable_periods = FALSE;  // Default value for new areas
 
 // Resolution - what blocks can be booked, in seconds.
 // Default is half an hour: 1800 seconds.
-$resolution = (30 * 60);  // DEFAULT VALUE FOR NEW AREAS
+$resolution = (15 * 60);  // DEFAULT VALUE FOR NEW AREAS
 
 // If the following variable is set to TRUE, the resolution of bookings
 // is forced to be the value of $resolution, rather than the resolution set
@@ -55,7 +55,7 @@ $force_resolution = FALSE;
 
 // Default duration - default length (in seconds) of a booking.
 // Defaults to (60 * 60) seconds, i.e. an hour
-$default_duration = (60 * 60);  // DEFAULT VALUE FOR NEW AREAS
+$default_duration = (30 * 60);  // DEFAULT VALUE FOR NEW AREAS
 // Whether the "All Day" checkbox should be checked by default.  (Note
 // that even if this is set to true, $default_duration should still
 // be set as that is the duration that will be used when the All Day
@@ -75,12 +75,12 @@ $default_duration_all_day = FALSE;  // DEFAULT VALUE FOR NEW AREAS
 // being 18:30 -> 19:00
 
 // The beginning of the first slot of the day (DEFAULT VALUES FOR NEW AREAS)
-$morningstarts         = 7;   // must be integer in range 0-23
+$morningstarts         = 5;   // must be integer in range 0-23
 $morningstarts_minutes = 0;   // must be integer in range 0-59
 
 // The beginning of the last slot of the day (DEFAULT VALUES FOR NEW AREAS)
-$eveningends           = 18;  // must be integer in range 0-23
-$eveningends_minutes   = 30;   // must be integer in range 0-59
+$eveningends           = 23;  // must be integer in range 0-23
+$eveningends_minutes   = 45;   // must be integer in range 0-59
 
 // Example 1.
 // If resolution=3600 (1 hour), morningstarts = 8 and morningstarts_minutes = 30
