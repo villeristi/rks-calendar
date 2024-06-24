@@ -470,7 +470,7 @@ $vocab["show_hide_columns"]  = "Näytä / piilota sarakkeet";
 
 // Entry types
 $vocab["type.I"]             = "Omatoimitreeni";
-$vocab["type.E"]             = "Agilityvastaavan varaus";
+$vocab["type.E"]             = "Vakiovuoro";
 
 // General
 $vocab["fatal_db_error"]     = "Virhe: tietokanta ei ole käytettävissä.";
