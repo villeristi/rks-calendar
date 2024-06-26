@@ -1773,11 +1773,11 @@ foreach ($edit_entry_field_order as $key)
       break;
 
     case 'type':
-      $fieldset->addElement(get_field_type($type));
+      $fieldset->addElement(get_field_type($type, !is_admin()));
       break;
 
     case 'confirmation_status':
-      $fieldset->addElement(get_field_confirmation_status($tentative));
+      $fieldset->addElement(get_field_confirmation_status($tentative, !is_admin()));
       break;
 
     case 'privacy_status':
