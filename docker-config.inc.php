@@ -140,7 +140,7 @@ $weekstarts = 1;
 // --------------
 
 // Set the email address of the From field. Default is 'admin_email@your.org'
-$mail_settings['from'] = 'varaus@rks.fi';
+$mail_settings['from'] = $_ENV['ADMIN_MAIL'];
 
 // By default MRBS will send some emails (eg booking approval emails) as though they have come from
 // the user, rather than the From address above.   However some email servers will not allow this in
@@ -161,7 +161,7 @@ $mail_settings['organizer'] = 'varaus@rks.fi';
 
 // Set the recipient email. Default is 'admin_email@your.org'. You can define
 // more than one recipient like this "john@doe.com,scott@tiger.com"
-$mail_settings['recipients'] = 'varaus@rks.fi';
+$mail_settings['recipients'] = $_ENV['ADMIN_MAIL'];
 
 // Set email address of the Carbon Copy field. Default is ''. You can define
 // more than one recipient (see 'recipients')
