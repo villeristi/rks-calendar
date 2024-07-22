@@ -19,6 +19,7 @@ services:
           SMTP_PORT: 587
           SMTP_LOGIN: 7702b5001@smtp-brevo.com
           SMTP_PASSWORD: 1MkExKCsaVBTZHUr
+          ADMIN_MAIL: foobar@gmail.com
         links:
             - db
         networks:

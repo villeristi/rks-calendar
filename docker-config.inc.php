@@ -132,6 +132,14 @@ $theme = "default";
 // Start of week: 0 for Sunday, 1 for Monday, etc.
 $weekstarts = 1;
 
+
+// SETTINGS FOR BOOKING CONFIRMATION
+
+// Allows bookings to be marked as "tentative", ie not yet 100% certain,
+// and confirmed later.   Useful if you want to reserve a slot but at the same
+// time let other people know that there's a possibility it may not be needed.
+$confirmation_enabled = FALSE;
+
 /**********************************************
  * Email settings
  **********************************************/
