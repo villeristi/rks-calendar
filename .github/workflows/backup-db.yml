@@ -9,7 +9,7 @@ env:
   SITE_IP: 94.237.119.58
   SITE_USER: root
   SITE_DB: rks
-  GDRIVE_FOLDER_ID: 1iLACqSoz_iJF6OJsx5_8ihg_w0DuDhRE
+  SITE_BUCKET: gs://rissola-backups
 
 jobs:
   backup:
@@ -19,32 +19,13 @@ jobs:
         uses: 'google-github-actions/auth@v2'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-          token_format: 'access_token'
-          scope: 'https://www.googleapis.com/auth/drive.file'
-          
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ env.SITE_IP }} >> ~/.ssh/known_hosts
-          
-      - name: Setup gdrive
-        run: |
-          echo '${{ secrets.GCP_CREDENTIALS }}' > /tmp/service-account.json
-          # Download and install the new gdrive
-          curl -Lo gdrive.tar.gz https://github.com/glotlabs/gdrive/releases/download/3.9.1/gdrive_linux-x64.tar.gz
-          tar -xzf gdrive.tar.gz
-          sudo mv gdrive /usr/local/bin/
-          chmod +x /usr/local/bin/gdrive
-          
-      - name: Backup database to Google Drive
-        run: |
-          TIMESTAMP=$(date +%Y-%m-%d-%H:%M)
-          BACKUP_FILE="hqfinder_${TIMESTAMP}.sql.gz"
-          # Create backup and save to temporary file
-          ssh -i ~/.ssh/id_rsa $SITE_USER@$SITE_IP "dokku mariadb:export $SITE_DB" | gzip -c > "/tmp/${BACKUP_FILE}"
-          # Upload to Google Drive using service account
-          gdrive --service-account-file /tmp/service-account.json upload --parent "${{ env.GDRIVE_FOLDER_ID }}" "/tmp/${BACKUP_FILE}"
-          rm "/tmp/${BACKUP_FILE}"
-          rm /tmp/service-account.json
+          ssh-keyscan -H $SITE_IP >> ~/.ssh/known_hosts
+      - name: Backup RKS database
+        run: ssh -i ~/.ssh/id_rsa $SITE_USER@$SITE_IP "dokku mariadb:export $SITE_DB" | gzip -c | gsutil -q cp - $SITEBUCKET/rks_$(date +%Y-%m-%d-%H:%M).sql.gz
