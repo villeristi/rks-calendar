@@ -28,4 +28,14 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H $SITE_IP >> ~/.ssh/known_hosts
       - name: Backup RKS database
-        run: ssh -i ~/.ssh/id_rsa $SITE_USER@$SITE_IP "dokku mariadb:export $SITE_DB" | gzip -c | gsutil -q cp - $SITEBUCKET/rks_$(date +%Y-%m-%d-%H:%M).sql.gz
+        run: |
+          # Create timestamp
+          TIMESTAMP=$(date +%Y-%m-%d-%H:%M)
+          # Create backup file
+          ssh -i ~/.ssh/id_rsa $SITE_USER@$SITE_IP "dokku mariadb:export $SITE_DB" > /tmp/backup.sql
+          # Compress the file
+          gzip /tmp/backup.sql
+          # Upload to GCS
+          gsutil -q cp /tmp/backup.sql.gz $SITE_BUCKET/rks_${TIMESTAMP}.sql.gz
+          # Cleanup
+          rm /tmp/backup.sql.gz
