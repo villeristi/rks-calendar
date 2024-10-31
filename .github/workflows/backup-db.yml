@@ -1,0 +1,48 @@
+name: 'Backup DB'
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 3 * * *'
+
+env:
+  SITE_IP: 94.237.119.58
+  SITE_USER: root
+  SITE_DB: rks
+  GDRIVE_FOLDER_ID: 1iLACqSoz_iJF6OJsx5_8ihg_w0DuDhRE
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          create_credentials_file: true
+          token_format: 'access_token'
+          scope: 'https://www.googleapis.com/auth/drive.file'
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ env.SITE_IP }} >> ~/.ssh/known_hosts
+
+      - name: Install Google Drive CLI tool
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y golang
+          go install github.com/prasmussen/gdrive@latest
+          echo "${HOME}/go/bin" >> $GITHUB_PATH
+
+      - name: Backup database to Google Drive
+        run: |
+          TIMESTAMP=$(date +%Y-%m-%d-%H:%M)
+          BACKUP_FILE="hqfinder_${TIMESTAMP}.sql.gz"
+          # Create backup and save to temporary file
+          ssh -i ~/.ssh/id_rsa $SITE_USER@$SITE_IP "dokku mariadb:export $SITE_DB" | gzip -c > "/tmp/${BACKUP_FILE}"
+          # Upload to Google Drive using gdrive CLI
+          gdrive upload --parent ${{ env.GDRIVE_FOLDER_ID }} "/tmp/${BACKUP_FILE}"
+          rm "/tmp/${BACKUP_FILE}"
