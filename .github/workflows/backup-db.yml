@@ -29,10 +29,14 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H ${{ env.SITE_IP }} >> ~/.ssh/known_hosts
           
-      - name: Install Google Drive CLI tool
+      - name: Setup gdrive
         run: |
-          curl -fsSL https://github.com/prasmussen/gdrive/releases/download/2.1.1/gdrive_2.1.1_linux_386.tar.gz | sudo tar -xz -C /usr/local/bin
-          sudo chmod +x /usr/local/bin/gdrive
+          echo '${{ secrets.GCP_CREDENTIALS }}' > /tmp/service-account.json
+          # Download and install the new gdrive
+          curl -Lo gdrive.tar.gz https://github.com/glotlabs/gdrive/releases/latest/download/gdrive-linux-x86_64.tar.gz
+          tar -xzf gdrive.tar.gz
+          sudo mv gdrive /usr/local/bin/
+          chmod +x /usr/local/bin/gdrive
           
       - name: Backup database to Google Drive
         run: |
@@ -40,6 +44,7 @@ jobs:
           BACKUP_FILE="hqfinder_${TIMESTAMP}.sql.gz"
           # Create backup and save to temporary file
           ssh -i ~/.ssh/id_rsa $SITE_USER@$SITE_IP "dokku mariadb:export $SITE_DB" | gzip -c > "/tmp/${BACKUP_FILE}"
-          # Upload to Google Drive using gdrive CLI
-          gdrive --service-account "${{ secrets.GCP_CREDENTIALS }}" upload --parent "${{ env.GDRIVE_FOLDER_ID }}" "/tmp/${BACKUP_FILE}"
+          # Upload to Google Drive using service account
+          gdrive --service-account-file /tmp/service-account.json upload --parent "${{ env.GDRIVE_FOLDER_ID }}" "/tmp/${BACKUP_FILE}"
           rm "/tmp/${BACKUP_FILE}"
+          rm /tmp/service-account.json
